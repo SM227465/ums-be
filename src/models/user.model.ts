@@ -191,7 +191,6 @@ const userSchema = new Schema<IUserModel>(
         delete ret.passwordResetToken;
         delete ret.passwordResetExpires;
         delete ret.__v;
-        delete ret._id;
         return ret;
       },
     },
@@ -211,7 +210,6 @@ userSchema.set('toJSON', {
     delete ret.passwordChangedAt;
     delete ret.passwordResetToken;
     delete ret.passwordResetExpires;
-    delete ret._id;
     delete ret.__v;
     return ret;
   },
