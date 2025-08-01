@@ -5,6 +5,8 @@ import {
   forgotPassword,
   resetPassword,
   login,
+  protect,
+  getProfile,
 } from '../controllers/auth.controller';
 
 // calling Router function of express
@@ -519,5 +521,7 @@ router.post('/forgot-password', forgotPassword);
  *                 message: "Internal server error"
  */
 router.patch('/reset-password/:token', resetPassword);
+
+router.get('/profile', protect, getProfile);
 
 export default router;

@@ -262,3 +262,10 @@ export const protect = catchAsync(async (req, res, next) => {
   res.locals.user = currentUser;
   next();
 });
+
+export const getProfile = catchAsync(async (req, res, next) => {
+  // @ts-ignore
+  const user = req.user;
+
+  res.status(200).json(user);
+});
