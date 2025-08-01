@@ -195,7 +195,7 @@ export class UserService {
     }
 
     const parents = await User.find(query)
-      .select('firstName lastName email role')
+      .select('firstName lastName email role _id')
       .sort({ firstName: 1 });
 
     return parents;
