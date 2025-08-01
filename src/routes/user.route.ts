@@ -4,6 +4,8 @@ import { getAllUsers, getAvailableParents, getUsersByParent } from '../controlle
 
 const router = Router();
 
+router.get('/available-parents', getAvailableParents);
+
 // All routes require authentication
 router.use(protect);
 
@@ -11,7 +13,6 @@ router.use(protect);
 router.get('/', getAllUsers);
 
 // Get available parents for a role
-router.get('/available-parents', getAvailableParents);
 
 // Get users by parent ID
 router.get('/parent/:parentId', getUsersByParent);
