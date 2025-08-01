@@ -17,7 +17,7 @@ const options: Options = {
     },
     servers: [
       {
-        url: 'https://blog-rdlk.onrender.com',
+        url: 'https://ums-be.onrender.com/',
         description: 'Dev',
       },
     ],
