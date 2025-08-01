@@ -180,30 +180,18 @@ export class UserService {
     };
   }
 
-  static async getAvailableParents(role: UserRole, currentUser: IUserModel) {
+  static async getAvailableParents(role: UserRole) {
     let query: any = {};
 
     if (role === UserRole.SUB_ADMIN) {
-      // Sub-admins can be assigned to admins
+      // Show all admins for sub-admin signup
       query.role = UserRole.ADMIN;
-
-      // If current user is not admin, only show admins they have access to
-      if (currentUser.role !== UserRole.ADMIN) {
-        query._id = currentUser.parentId;
-      }
     } else if (role === UserRole.USER) {
-      // Users can be assigned to sub-admins
+      // Show all sub-admins for user signup
       query.role = UserRole.SUB_ADMIN;
-
-      // Show sub-admins based on current user's access level
-      if (currentUser.role === UserRole.SUB_ADMIN) {
-        query.$or = [
-          { _id: currentUser._id }, // Themselves
-          { parentId: currentUser.parentId }, // Sibling sub-admins
-        ];
-      } else if (currentUser.role === UserRole.USER) {
-        query._id = currentUser.parentId; // Only their parent
-      }
+    } else {
+      // Admin role doesn't need parents
+      return [];
     }
 
     const parents = await User.find(query)

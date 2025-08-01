@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import catchAsync from '../utils/catch-async.util';
 import { UserService } from '../services/user.service';
 import User, { UserRole } from '../models/user.model';
+import AppError from '../utils/app-error.util';
 
 export const getAllUsers = catchAsync(async (req, res, next) => {
   // @ts-ignore
@@ -53,15 +54,12 @@ export const getUsersByParent = catchAsync(async (req, res, next) => {
 
 export const getAvailableParents = catchAsync(async (req, res, next) => {
   const { role } = req.query;
-  // @ts-ignore
-  const currentUser = req.user!;
 
   if (!role) {
-    res.status(400).json({ success: false, message: 'Role is required to get available parents' });
-    return;
+    return next(new AppError('Role is required to get available parents', 400));
   }
 
-  const parents = await UserService.getAvailableParents(role as UserRole, currentUser);
+  const parents = await UserService.getAvailableParents(role as UserRole);
 
   res
     .status(200)
