@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/users', userRouter);
 // app.use('/api/v1/blogs', blogRouter);
 // app.use('/api/v1/comments', commentRouter);
 
