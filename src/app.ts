@@ -24,12 +24,12 @@ app.use(
   })
 );
 
-// const limiter = rateLimit({
-//   max: 100,
-//   windowMs: 60 * 60 * 1000,
-//   message: 'Too many request from your IP, please try again in an hour.',
-// });
-// app.use('/api', limiter);
+const limiter = rateLimit({
+  max: 900,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many request from your IP, please try again in an hour.',
+});
+app.use('/api', limiter);
 
 app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
@@ -45,8 +45,6 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/documentation', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
-// app.use('/api/v1/blogs', blogRouter);
-// app.use('/api/v1/comments', commentRouter);
 
 app.all('*', (req, res, next) => {
   res.status(404).json({

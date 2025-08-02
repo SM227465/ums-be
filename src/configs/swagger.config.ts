@@ -1,7 +1,12 @@
 import path from 'path';
 import swaggerJsdoc, { Options } from 'swagger-jsdoc';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+
+console.log({ isDevelopment });
 
 const options: Options = {
   definition: {
