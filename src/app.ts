@@ -24,12 +24,12 @@ app.use(
   })
 );
 
-const limiter = rateLimit({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: 'Too many request from your IP, please try again in an hour.',
-});
-app.use('/api', limiter);
+// const limiter = rateLimit({
+//   max: 100,
+//   windowMs: 60 * 60 * 1000,
+//   message: 'Too many request from your IP, please try again in an hour.',
+// });
+// app.use('/api', limiter);
 
 app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
